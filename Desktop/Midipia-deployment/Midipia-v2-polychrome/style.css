@@ -1,0 +1,149 @@
+/* Variables globales para la paleta de colores */
+:root {
+  --bg-main: #121212;
+  --panel-bg: #1e1e1e;
+  --note-color: #00bcd4;
+  --accent-color: #ff9800;
+  --text-color: #ffffff;
+  --lane-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-color);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Panel de controles superior */
+#controls-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: var(--panel-bg);
+  border-bottom: 2px solid #333;
+  z-index: 100;
+}
+
+.song-btn, .custom-file-upload, #speed-control {
+  background-color: var(--accent-color);
+  color: #121212;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.song-btn:hover, .custom-file-upload:hover {
+  opacity: 0.8;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+#debug-log {
+  background: #000;
+  color: #0f0;
+  padding: 5px 10px;
+  font-family: monospace;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Contenedor principal del juego */
+#game-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#score-board {
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: right;
+  color: var(--accent-color);
+}
+
+/* La autopista donde caen las notas */
+.highway {
+  flex: 1;
+  display: flex;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-left: 1px solid #333;
+  border-right: 1px solid #333;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Carriles generados por el JS */
+.lane {
+  height: 100%;
+  position: relative;
+  border-right: 1px solid var(--lane-border);
+  display: flex;
+  justify-content: center;
+}
+
+/* Ajustes de ancho para simular la distribución del teclado */
+.white-key {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.black-key {
+  flex: 0.6;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* La zona de impacto al fondo de la pantalla */
+#strike-zone {
+  position: absolute;
+  bottom: 10%;
+  width: 100%;
+  height: 40px;
+  background-color: rgba(255, 152, 0, 0.2);
+  border-top: 2px solid var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+  z-index: 10;
+  pointer-events: none; /* Para que no interfiera con clics */
+}
+
+/* Las notas generadas por GSAP */
+.note {
+  position: absolute;
+  background-color: var(--note-color);
+  border-radius: 4px;
+  width: 90%; 
+  box-shadow: 0 0 12px var(--note-color);
+  opacity: 0.9;
+  z-index: 5;
+  
+  /* NUEVO: Estilos para el texto de la nota */
+  display: flex;
+  justify-content: center; /* Centra el texto horizontalmente */
+  align-items: flex-end;   /* Pega el texto a la parte inferior del bloque */
+  padding-bottom: 5px;     /* Da un pequeño margen para que no toque el borde */
+  box-sizing: border-box;  /* Evita que el padding desajuste el tamaño total */
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 14px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Sombra oscura para que contraste con el cyan */
+  overflow: hidden; /* Oculta el texto si el bloque es demasiado pequeño */
+}
+
